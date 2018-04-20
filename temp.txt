@@ -1,0 +1,150 @@
+Checking mm_malloc for correctness,
+================= @MALLOC ===============
+WANT: 130
+NEW PAGE: 0x4024000, BLOCKS: 254, LAST BLOCK: 0x4024ff0
+ALLOCATED: 2, AT: 0x4024010
+REMAINING: 252, AT: 0x4024030
+ALLOCATED: 130, AT: 0x4024030
+REMAINING: 122, AT: 0x4024850
+================= /MALLOC ===============
+
+================= @MALLOC ===============
+WANT: 130
+CHECK PAGE: 0x4024000
+0x4024010: 2
+0x4024030: 130
+0x4024850: 122
+NEW PAGE: 0x4026000, BLOCKS: 254, LAST BLOCK: 0x4026ff0
+ALLOCATED: 2, AT: 0x4026010
+REMAINING: 252, AT: 0x4026030
+ALLOCATED: 130, AT: 0x4026030
+REMAINING: 122, AT: 0x4026850
+================= /MALLOC ===============
+
+================= @FREE ===============
+CURR BEFORE 0x4026030, alloc: 0, size: 130
+PREV BEFORE 0x4026010, alloc: 1, size: 2
+NEXT BEFORE 0x4026850, alloc: 0, size: 122
+----------
+CURR AFTER 0x4026030, alloc: 0, size: 252
+PREV AFTER 0x4026010, alloc: 1, size: 2
+NEXT AFTER 0x4026ff0, alloc: 1, size: 0
+================= /FREE ===============
+
+================= @MALLOC ===============
+WANT: 5
+CHECK PAGE: 0x4024000
+0x4024010: 2
+0x4024030: 130
+0x4024850: 122
+ALLOCATED: 5, AT: 0x4024850
+REMAINING: 117, AT: 0x40248a0
+================= /MALLOC ===============
+
+================= @MALLOC ===============
+WANT: 257
+CHECK PAGE: 0x4024000
+0x4024010: 2
+0x4024030: 130
+0x4024850: 5
+0x40248a0: 117
+CHECK PAGE: 0x4026000
+0x4026010: 2
+0x4026030: 252
+NEW PAGE: 0x4027000, BLOCKS: 510, LAST BLOCK: 0x4028ff0
+ALLOCATED: 2, AT: 0x4027010
+REMAINING: 508, AT: 0x4027030
+ALLOCATED: 257, AT: 0x4027030
+REMAINING: 251, AT: 0x4028040
+================= /MALLOC ===============
+
+================= @FREE ===============
+CURR BEFORE 0x4027030, alloc: 0, size: 257
+PREV BEFORE 0x4027010, alloc: 1, size: 2
+NEXT BEFORE 0x4028040, alloc: 0, size: 251
+----------
+CURR AFTER 0x4027030, alloc: 0, size: 508
+PREV AFTER 0x4027010, alloc: 1, size: 2
+NEXT AFTER 0x4028ff0, alloc: 1, size: 0
+================= /FREE ===============
+
+================= @MALLOC ===============
+WANT: 257
+CHECK PAGE: 0x4024000
+0x4024010: 2
+0x4024030: 130
+0x4024850: 5
+0x40248a0: 117
+CHECK PAGE: 0x4026000
+0x4026010: 2
+0x4026030: 252
+CHECK PAGE: 0x4027000
+0x4027010: 2
+0x4027030: 508
+ALLOCATED: 257, AT: 0x4027030
+REMAINING: 251, AT: 0x4028040
+================= /MALLOC ===============
+
+================= @FREE ===============
+CURR BEFORE 0x4024030, alloc: 0, size: 130
+PREV BEFORE 0x4024010, alloc: 1, size: 2
+NEXT BEFORE 0x4024850, alloc: 1, size: 5
+----------
+CURR AFTER 0x4024030, alloc: 0, size: 130
+PREV AFTER 0x4024010, alloc: 1, size: 2
+NEXT AFTER 0x4024850, alloc: 1, size: 5
+================= /FREE ===============
+
+================= @FREE ===============
+CURR BEFORE 0x4024850, alloc: 0, size: 5
+PREV BEFORE 0x4024030, alloc: 0, size: 130
+NEXT BEFORE 0x40248a0, alloc: 0, size: 117
+----------
+CURR AFTER 0x4024030, alloc: 0, size: 252
+PREV AFTER 0x4024010, alloc: 1, size: 2
+NEXT AFTER 0x4024ff0, alloc: 1, size: 0
+================= /FREE ===============
+
+================= @MALLOC ===============
+WANT: 257
+CHECK PAGE: 0x4024000
+0x4024010: 2
+0x4024030: 252
+CHECK PAGE: 0x4026000
+0x4026010: 2
+0x4026030: 252
+CHECK PAGE: 0x4027000
+0x4027010: 2
+0x4027030: 257
+0x4028040: 251
+NEW PAGE: 0x402a000, BLOCKS: 510, LAST BLOCK: 0x402bff0
+ALLOCATED: 2, AT: 0x402a010
+REMAINING: 508, AT: 0x402a030
+ALLOCATED: 257, AT: 0x402a030
+REMAINING: 251, AT: 0x402b040
+================= /MALLOC ===============
+
+================= @FREE ===============
+CURR BEFORE 0x4027030, alloc: 0, size: 257
+PREV BEFORE 0x4027010, alloc: 1, size: 2
+NEXT BEFORE 0x4028040, alloc: 0, size: 251
+----------
+CURR AFTER 0x4027030, alloc: 0, size: 508
+PREV AFTER 0x4027010, alloc: 1, size: 2
+NEXT AFTER 0x4028ff0, alloc: 1, size: 0
+================= /FREE ===============
+
+================= @FREE ===============
+CURR BEFORE 0x402a030, alloc: 0, size: 257
+PREV BEFORE 0x402a010, alloc: 1, size: 2
+NEXT BEFORE 0x402b040, alloc: 0, size: 251
+----------
+CURR AFTER 0x402a030, alloc: 0, size: 508
+PREV AFTER 0x402a010, alloc: 1, size: 2
+NEXT AFTER 0x402bff0, alloc: 1, size: 0
+================= /FREE ===============
+defensiveness,
+================= MALLOC ===============
+WANT: 130
+CHECK PAGE: 0x4024000
+==14358== Invalid read of size 8
